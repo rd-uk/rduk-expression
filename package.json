@@ -4,7 +4,8 @@
   "description": "Generate abstract syntax tree",
   "main": "lib/index.js",
   "scripts": {
-    "test": "istanbul cover jasmine"
+    "test": "istanbul cover jasmine --report cobertura",
+    "postest": "istanbul report && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "rduk",
