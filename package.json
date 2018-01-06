@@ -1,0 +1,24 @@
+{
+  "name": "@rduk/expression",
+  "version": "0.1.0",
+  "description": "Generate abstract syntax tree",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "istanbul cover jasmine"
+  },
+  "keywords": [
+    "rduk",
+    "ast"
+  ],
+  "author": "RDUK <tech@rduk.fr>",
+  "license": "MIT",
+  "dependencies": {
+    "@rduk/errors": "1.3.0",
+    "@rduk/logger": "0.1.4"
+  },
+  "devDependencies": {
+    "coveralls": "3.0.0",
+    "istanbul": "0.4.5",
+    "jasmine": "2.8.0"
+  }
+}

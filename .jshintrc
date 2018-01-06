@@ -1,0 +1,7 @@
+{
+  "esversion": 6,
+  "strict": "global",
+  "quotmark": true,
+  "node": true,
+  "jasmine": true
+}
