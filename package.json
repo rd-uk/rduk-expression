@@ -1,21 +1,28 @@
 {
   "name": "@rduk/expression",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate abstract syntax tree",
+  "engines": {
+    "node": ">=6.4.0"
+  },
   "main": "lib/index.js",
   "scripts": {
     "test": "istanbul cover jasmine --report cobertura",
-    "posttest": "istanbul report && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "posttest": "istanbul report",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "rduk",
-    "ast"
+    "ast",
+    "expression",
+    "tree",
+    "lambda"
   ],
   "author": "RDUK <tech@rduk.fr>",
   "license": "MIT",
   "dependencies": {
     "@rduk/errors": "1.3.0",
-    "@rduk/logger": "0.1.4"
+    "@rduk/logger": "0.1.5"
   },
   "devDependencies": {
     "coveralls": "3.0.0",
