@@ -31,7 +31,7 @@ describe('ParseletCollection', function() {
 
     describe('add method', function() {
 
-          let collection = new ParseletCollection;
+          let collection = new ParseletCollection();
 
           describe('called with null argument', function() {
               it('should throw an ArgumentNullError', function() {
@@ -49,6 +49,6 @@ describe('ParseletCollection', function() {
               });
           });
 
-    })
+    });
 
 });
