@@ -50,8 +50,7 @@ describe('parser', function() {
         });
 
         it('should success', function() {
-            let fn = user => (user.rating > .5);
-            let expression = ast.lambda.parse(fn);
+            let expression = ast.lambda.parse('user => (user.rating > .5)');
 
             expect(expression).toBeDefined();
             expect(expression instanceof LambdaExpression).toBe(true);

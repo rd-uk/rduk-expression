@@ -59,7 +59,7 @@ describe('parselet', function() {
                 let binary = new BinaryParselet('test');
                 expect(binary.precedence).toBe(50);
             });
-        })
+        });
     });
 
 });
