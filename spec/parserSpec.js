@@ -37,7 +37,6 @@ describe('parser', function() {
             let fn = user => (user.name.toLowerCase().contains('john') &&
               (user.age < 25 || user.age >= 30));
             let expression = ast.lambda.parse(fn);
-
             expect(expression).toBeDefined();
             expect(expression instanceof LambdaExpression).toBe(true);
             expect(expression.args instanceof NameExpression).toBe(true);
@@ -51,7 +50,6 @@ describe('parser', function() {
 
         it('should success', function() {
             let expression = ast.lambda.parse('user => (user.rating > .5)');
-
             expect(expression).toBeDefined();
             expect(expression instanceof LambdaExpression).toBe(true);
             expect(expression.body instanceof BinaryExpression).toBe(true);
@@ -61,7 +59,6 @@ describe('parser', function() {
         it('should success', function() {
             let fn = user => (user.rating > 0.5);
             let expression = ast.lambda.parse(fn);
-
             expect(expression).toBeDefined();
             expect(expression instanceof LambdaExpression).toBe(true);
             expect(expression.body instanceof BinaryExpression).toBe(true);
@@ -69,13 +66,23 @@ describe('parser', function() {
         });
 
         it('should success', function() {
-            let fn = user => ({
+            let fn = (user, profile) => ({
+                id: user.id,
                 email: user.email,
-                password: user.password
+                password: user.password,
+                firstName: profile.firstname,
+                lastName: profile.lastname
             });
             let expression = ast.lambda.parse(fn);
-
+            console.log(expression.body.fields[0]);
             expect(expression).toBeDefined();
+            expect(expression.body.fields.length).toBe(5);
+            expect(expression.body.fields[0].name).toBe('id');
+            expect(expression.body.fields[0].assignment.property).toBe('id');
+            expect(expression.body.fields[0].assignment.context.name).toBe('user');
+            expect(expression.body.fields[4].name).toBe('lastName');
+            expect(expression.body.fields[4].assignment.property).toBe('lastname');
+            expect(expression.body.fields[4].assignment.context.name).toBe('profile');
         });
 
         it('should throw an Error', function() {

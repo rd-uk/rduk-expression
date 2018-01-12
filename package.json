@@ -1,6 +1,6 @@
 {
   "name": "@rduk/expression",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Generate abstract syntax tree",
   "engines": {
     "node": ">=6.4.0"
@@ -8,8 +8,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "istanbul cover jasmine --report cobertura",
-    "posttest": "istanbul report",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "report": "istanbul report",
+    "coveralls": " npm run report && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "rduk",
