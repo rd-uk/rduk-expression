@@ -86,6 +86,15 @@ describe('parser', function() {
             expect(expression.body.fields[4].assignment.context.name).toBe('profile');
         });
 
+        it('should success', function() {
+            let fn = (user) => ({
+                id: user.id
+            });
+            let expression = ast.lambda.parse(fn);
+            expect(expression).toBeDefined();
+            expect(Array.isArray(expression.body.fields)).toBe(true);
+        });
+
         it('should throw an Error', function() {
             expect(function() {
                 ast.lambda.parse('====');
