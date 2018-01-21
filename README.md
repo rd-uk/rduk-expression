@@ -1,10 +1,10 @@
 # RDUK - Expression
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/rd-uk/rduk-expression.svg)](https://greenkeeper.io/)
 
 [![Build Status](https://travis-ci.org/rd-uk/rduk-expression.svg?branch=master)](https://travis-ci.org/rd-uk/rduk-expression)
 [![Coverage Status](https://coveralls.io/repos/github/rd-uk/rduk-expression/badge.svg?branch=master)](https://coveralls.io/github/rd-uk/rduk-expression?branch=master)
-[![bitHound Overall Score](https://www.bithound.io/github/rd-uk/rduk-expression/badges/score.svg)](https://www.bithound.io/github/rd-uk/rduk-expression)
+[![Greenkeeper badge](https://badges.greenkeeper.io/rd-uk/rduk-expression.svg)](https://greenkeeper.io/)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Generate abstract syntax tree
 
