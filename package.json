@@ -1,16 +1,25 @@
 {
   "name": "@rduk/expression",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Generate abstract syntax tree",
   "engines": {
     "node": ">=6.4.0"
   },
   "main": "lib/index.js",
   "scripts": {
+    "pretest": "standard --fix",
     "test": "istanbul cover jasmine --report cobertura",
     "report": "istanbul report",
     "coveralls": " npm run report && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rd-uk/rduk-expression.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rd-uk/rduk-expression/issues"
+  },
+  "homepage": "https://github.com/rd-uk/rduk-expression#readme",
   "keywords": [
     "rduk",
     "ast",
@@ -27,6 +36,7 @@
   "devDependencies": {
     "coveralls": "3.0.0",
     "istanbul": "0.4.5",
-    "jasmine": "2.9.0"
+    "jasmine": "2.9.0",
+    "standard": "10.0.3"
   }
 }

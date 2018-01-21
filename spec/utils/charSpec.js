@@ -22,240 +22,218 @@
  * SOFTWARE.
  */
 
-'use strict';
+ /* eslint-env jasmine */
 
-describe('char', function() {
+'use strict'
 
-    let char = require('../../lib/utils/char');
-    let letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let digits = '0123456789';
-    let operators = '<>=+-!%&|^*?:~';
-    let delimiters = '{[(;)]}';
+describe('char', function () {
+  let char = require('../../lib/utils/char')
+  let letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let digits = '0123456789'
+  let operators = '<>=+-!%&|^*?:~'
+  let delimiters = '{[(;)]}'
 
-    describe('isLetter', function() {
+  describe('isLetter', function () {
+    describe('when letter passed as argument', function () {
+      it('should success', function () {
+        letters.split('').forEach(letter => {
+          expect(char.isLetter(letter)).toBe(true)
+        })
+      })
+    })
 
-        describe('when letter passed as argument', function() {
-            it('should success', function() {
-                letters.split('').forEach(letter => {
-                    expect(char.isLetter(letter)).toBe(true);
-                });
-            });
-        });
+    describe('when digit passed as argument', function () {
+      it('should fail', function () {
+        digits.split('').forEach(digit => {
+          expect(char.isLetter(digit)).toBe(false)
+        })
+      })
+    })
+  })
 
-        describe('when digit passed as argument', function() {
-            it('should fail', function() {
-                digits.split('').forEach(digit => {
-                    expect(char.isLetter(digit)).toBe(false);
-                });
-            });
-        });
+  describe('isDigit', function () {
+    describe('when digit passed as argument', function () {
+      it('should success', function () {
+        digits.split('').forEach(digit => {
+          expect(char.isDigit(digit)).toBe(true)
+        })
+      })
+    })
 
-    });
+    describe('when letter passed as argument', function () {
+      it('should fail', function () {
+        letters.split('').forEach(letter => {
+          expect(char.isDigit(letter)).toBe(false)
+        })
+      })
+    })
+  })
 
-    describe('isDigit', function() {
+  describe('isLetterOrDigit', function () {
+    describe('when digit passed as argument', function () {
+      it('should success', function () {
+        digits.split('').forEach(digit => {
+          expect(char.isLetterOrDigit(digit)).toBe(true)
+        })
+      })
+    })
 
-        describe('when digit passed as argument', function() {
-            it('should success', function() {
-                digits.split('').forEach(digit => {
-                    expect(char.isDigit(digit)).toBe(true);
-                });
-            });
-        });
+    describe('when letter passed as argument', function () {
+      it('should success', function () {
+        letters.split('').forEach(letter => {
+          expect(char.isLetterOrDigit(letter)).toBe(true)
+        })
+      })
+    })
 
-        describe('when letter passed as argument', function() {
-            it('should fail', function() {
-                letters.split('').forEach(letter => {
-                    expect(char.isDigit(letter)).toBe(false);
-                });
-            });
-        });
+    describe('when something else passed as argument', function () {
+      it('should fail', function () {
+        expect(char.isLetterOrDigit('?')).toBe(false)
+      })
+    })
+  })
 
-    });
+  describe('isNameStart', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        `${letters}_$`.split('').forEach(c => {
+          expect(char.isNameStart(c)).toBe(true)
+        })
+      })
+    })
 
-    describe('isLetterOrDigit', function() {
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `${digits}-`.split('').forEach(c => {
+          expect(char.isNameStart(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-        describe('when digit passed as argument', function() {
-            it('should success', function() {
-                digits.split('').forEach(digit => {
-                    expect(char.isLetterOrDigit(digit)).toBe(true);
-                });
-            });
-        });
+  describe('isNamePart', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        `${letters}${digits}_$`.split('').forEach(c => {
+          expect(char.isNamePart(c)).toBe(true)
+        })
+      })
+    })
 
-        describe('when letter passed as argument', function() {
-            it('should success', function() {
-                letters.split('').forEach(letter => {
-                    expect(char.isLetterOrDigit(letter)).toBe(true);
-                });
-            });
-        });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `-`.split('').forEach(c => {
+          expect(char.isNamePart(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-        describe('when something else passed as argument', function() {
-            it('should fail', function() {
-                expect(char.isLetterOrDigit('?')).toBe(false);
-            });
-        });
+  describe('isQuote', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        '"\''.split('').forEach(c => {
+          expect(char.isQuote(c)).toBe(true)
+        })
+      })
+    })
 
-    });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `-`.split('').forEach(c => {
+          expect(char.isQuote(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-    describe('isNameStart', function() {
+  describe('isWhiteSpace', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        ' \t'.split('').forEach(c => {
+          expect(char.isWhiteSpace(c)).toBe(true)
+        })
+      })
+    })
 
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                `${letters}_$`.split('').forEach(c => {
-                    expect(char.isNameStart(c)).toBe(true);
-                });
-            });
-        });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `-`.split('').forEach(c => {
+          expect(char.isWhiteSpace(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `${digits}-`.split('').forEach(c => {
-                    expect(char.isNameStart(c)).toBe(false);
-                });
-            });
-        });
+  describe('isEndOfLine', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        '\r\n'.split('').forEach(c => {
+          expect(char.isEndOfLine(c)).toBe(true)
+        })
+      })
+    })
 
-    });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `-`.split('').forEach(c => {
+          expect(char.isEndOfLine(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-    describe('isNamePart', function() {
+  describe('isPunctuation', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        ',#'.split('').forEach(c => {
+          expect(char.isPunctuation(c)).toBe(true)
+        })
+      })
+    })
 
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                `${letters}${digits}_$`.split('').forEach(c => {
-                    expect(char.isNamePart(c)).toBe(true);
-                });
-            });
-        });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        `-`.split('').forEach(c => {
+          expect(char.isPunctuation(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `-`.split('').forEach(c => {
-                    expect(char.isNamePart(c)).toBe(false);
-                });
-            });
-        });
+  describe('isOperator', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        operators.split('').forEach(c => {
+          expect(char.isOperator(c)).toBe(true)
+        })
+      })
+    })
 
-    });
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        delimiters.split('').forEach(c => {
+          expect(char.isOperator(c)).toBe(false)
+        })
+      })
+    })
+  })
 
-    describe('isQuote', function() {
+  describe('isDelimiter', function () {
+    describe('when correct char passed as argument', function () {
+      it('should success', function () {
+        delimiters.split('').forEach(c => {
+          expect(char.isDelimiter(c)).toBe(true)
+        })
+      })
+    })
 
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                '"\''.split('').forEach(c => {
-                    expect(char.isQuote(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `-`.split('').forEach(c => {
-                    expect(char.isQuote(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-    describe('isWhiteSpace', function() {
-
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                ' \t'.split('').forEach(c => {
-                    expect(char.isWhiteSpace(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `-`.split('').forEach(c => {
-                    expect(char.isWhiteSpace(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-    describe('isEndOfLine', function() {
-
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                '\r\n'.split('').forEach(c => {
-                    expect(char.isEndOfLine(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `-`.split('').forEach(c => {
-                    expect(char.isEndOfLine(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-    describe('isPunctuation', function() {
-
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                ',#'.split('').forEach(c => {
-                    expect(char.isPunctuation(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                `-`.split('').forEach(c => {
-                    expect(char.isPunctuation(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-    describe('isOperator', function() {
-
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                operators.split('').forEach(c => {
-                    expect(char.isOperator(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                delimiters.split('').forEach(c => {
-                    expect(char.isOperator(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-    describe('isDelimiter', function() {
-
-        describe('when correct char passed as argument', function() {
-            it('should success', function() {
-                delimiters.split('').forEach(c => {
-                    expect(char.isDelimiter(c)).toBe(true);
-                });
-            });
-        });
-
-        describe('when bad char passed as argument', function() {
-            it('should fail', function() {
-                operators.split('').forEach(c => {
-                    expect(char.isDelimiter(c)).toBe(false);
-                });
-            });
-        });
-
-    });
-
-});
+    describe('when bad char passed as argument', function () {
+      it('should fail', function () {
+        operators.split('').forEach(c => {
+          expect(char.isDelimiter(c)).toBe(false)
+        })
+      })
+    })
+  })
+})

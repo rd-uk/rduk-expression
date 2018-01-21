@@ -22,93 +22,91 @@
  * SOFTWARE.
  */
 
-'use strict';
+/* eslint-env jasmine */
 
-describe('parser', function() {
+'use strict'
 
-    const ast = require('../lib');
-    const LambdaExpression = require('../lib/parser/expression/lambda');
-    const NameExpression = require('../lib/parser/expression/name');
-    const BinaryExpression = require('../lib/parser/expression/binary');
+describe('parser', function () {
+  const ast = require('../lib')
+  const LambdaExpression = require('../lib/parser/expression/lambda')
+  const NameExpression = require('../lib/parser/expression/name')
+  const BinaryExpression = require('../lib/parser/expression/binary')
 
-    describe('lambda', function() {
+  describe('lambda', function () {
+    it('should success', function () {
+      let fn = user => (user.name.toLowerCase().contains('john') &&
+              (user.age < 25 || user.age >= 30))
+      let expression = ast.lambda.parse(fn)
+      expect(expression).toBeDefined()
+      expect(expression instanceof LambdaExpression).toBe(true)
+      expect(expression.args instanceof NameExpression).toBe(true)
+      expect(expression.body instanceof BinaryExpression).toBe(true)
+      expect(expression.body.operator).toBe('&&')
+      expect(expression.body.left.name).toBe('contains')
+      expect(expression.body.right.operator).toBe('||')
+      expect(expression.body.right.left.operator).toBe('<')
+      expect(expression.body.right.right.operator).toBe('>=')
+    })
 
-        it('should success', function() {
-            let fn = user => (user.name.toLowerCase().contains('john') &&
-              (user.age < 25 || user.age >= 30));
-            let expression = ast.lambda.parse(fn);
-            expect(expression).toBeDefined();
-            expect(expression instanceof LambdaExpression).toBe(true);
-            expect(expression.args instanceof NameExpression).toBe(true);
-            expect(expression.body instanceof BinaryExpression).toBe(true);
-            expect(expression.body.operator).toBe('&&');
-            expect(expression.body.left.name).toBe('contains');
-            expect(expression.body.right.operator).toBe('||');
-            expect(expression.body.right.left.operator).toBe('<');
-            expect(expression.body.right.right.operator).toBe('>=');
-        });
+    it('should success', function () {
+      let expression = ast.lambda.parse('user => (user.rating > .5)')
+      expect(expression).toBeDefined()
+      expect(expression instanceof LambdaExpression).toBe(true)
+      expect(expression.body instanceof BinaryExpression).toBe(true)
+      expect(expression.body.right.value).toBe(0.5)
+    })
 
-        it('should success', function() {
-            let expression = ast.lambda.parse('user => (user.rating > .5)');
-            expect(expression).toBeDefined();
-            expect(expression instanceof LambdaExpression).toBe(true);
-            expect(expression.body instanceof BinaryExpression).toBe(true);
-            expect(expression.body.right.value).toBe(0.5);
-        });
+    it('should success', function () {
+      let fn = (user) => (user.rating > 0.5)
+      let expression = ast.lambda.parse(fn)
+      expect(expression).toBeDefined()
+      expect(expression instanceof LambdaExpression).toBe(true)
+      expect(expression.body instanceof BinaryExpression).toBe(true)
+      expect(expression.body.right.value).toBe(0.5)
+    })
 
-        it('should success', function() {
-            let fn = (user) => (user.rating > 0.5);
-            let expression = ast.lambda.parse(fn);
-            expect(expression).toBeDefined();
-            expect(expression instanceof LambdaExpression).toBe(true);
-            expect(expression.body instanceof BinaryExpression).toBe(true);
-            expect(expression.body.right.value).toBe(0.5);
-        });
+    it('should success', function () {
+      let fn = (user, profile, arg2) => ({
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        firstName: profile.firstname,
+        lastName: profile.lastname,
+        test: arg2.test
+      })
+      let expression = ast.lambda.parse(fn)
+      console.log(expression.body.fields[0])
+      expect(expression).toBeDefined()
+      expect(expression.body.fields.length).toBe(6)
+      expect(expression.body.fields[0].name).toBe('id')
+      expect(expression.body.fields[0].assignment.property).toBe('id')
+      expect(expression.body.fields[0].assignment.context.name).toBe('user')
+      expect(expression.body.fields[4].name).toBe('lastName')
+      expect(expression.body.fields[4].assignment.property).toBe('lastname')
+      expect(expression.body.fields[4].assignment.context.name).toBe('profile')
+    })
 
-        it('should success', function() {
-            let fn = (user, profile, arg2) => ({
-                id: user.id,
-                email: user.email,
-                password: user.password,
-                firstName: profile.firstname,
-                lastName: profile.lastname,
-                test: arg2.test
-            });
-            let expression = ast.lambda.parse(fn);
-            console.log(expression.body.fields[0]);
-            expect(expression).toBeDefined();
-            expect(expression.body.fields.length).toBe(6);
-            expect(expression.body.fields[0].name).toBe('id');
-            expect(expression.body.fields[0].assignment.property).toBe('id');
-            expect(expression.body.fields[0].assignment.context.name).toBe('user');
-            expect(expression.body.fields[4].name).toBe('lastName');
-            expect(expression.body.fields[4].assignment.property).toBe('lastname');
-            expect(expression.body.fields[4].assignment.context.name).toBe('profile');
-        });
+    it('should success', function () {
+      let fn = (user) => ({
+        id: user.id
+      })
+      let expression = ast.lambda.parse(fn)
+      expect(expression).toBeDefined()
+      expect(Array.isArray(expression.body.fields)).toBe(true)
+    })
 
-        it('should success', function() {
-            let fn = (user) => ({
-                id: user.id
-            });
-            let expression = ast.lambda.parse(fn);
-            expect(expression).toBeDefined();
-            expect(Array.isArray(expression.body.fields)).toBe(true);
-        });
+    it('should throw an Error', function () {
+      expect(function () {
+        ast.lambda.parse('====')
+      }).toThrowError()
 
-        it('should throw an Error', function() {
-            expect(function() {
-                ast.lambda.parse('====');
-            }).toThrowError();
+      expect(function () {
+        ast.lambda.parse('this.-test')
+      }).toThrowError()
 
-            expect(function() {
-                ast.lambda.parse('this.-test');
-            }).toThrowError();
-
-            expect(function() {
-                ast.lambda.parse('@');
-            }).toThrowError();
-        });
-
-    });
-
-});
+      expect(function () {
+        ast.lambda.parse('@')
+      }).toThrowError()
+    })
+  })
+})
