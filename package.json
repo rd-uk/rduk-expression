@@ -1,6 +1,6 @@
 {
   "name": "@rduk/expression",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Generate abstract syntax tree",
   "engines": {
     "node": ">=6.4.0"
