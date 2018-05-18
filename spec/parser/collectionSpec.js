@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
- /* eslint-env jasmine */
+/* eslint-env jasmine */
 
 'use strict'
 
