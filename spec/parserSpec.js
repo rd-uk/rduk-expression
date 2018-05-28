@@ -96,16 +96,8 @@ describe('parser', function () {
     })
 
     it('should throw an Error', function () {
-      expect(function () {
-        ast.lambda.parse('====')
-      }).toThrowError()
-
-      expect(function () {
-        ast.lambda.parse('this.-test')
-      }).toThrowError()
-
-      expect(function () {
-        ast.lambda.parse('@')
+      expect(() => {
+        console.log(ast.lambda.parse('this.email1 ==== this.email2'))
       }).toThrowError()
     })
   })
