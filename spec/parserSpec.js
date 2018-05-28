@@ -43,6 +43,7 @@ describe('parser', function () {
       expect(expression.body instanceof BinaryExpression).toBe(true)
       expect(expression.body.operator).toBe('&&')
       expect(expression.body.left.name).toBe('contains')
+      expect(expression.body.left.args[0].value).toBe('john')
       expect(expression.body.right.operator).toBe('||')
       expect(expression.body.right.left.operator).toBe('<')
       expect(expression.body.right.right.operator).toBe('>=')
