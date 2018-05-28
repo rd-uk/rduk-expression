@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.5.0 - 2018-05-28
 ### Changed
 - use `esprima` as lexer
+- update `coveralls` to latest version (3.0.1)
+- update `standard` to latest version (11.0.1)
 
 ## 0.4.0 - 2018-05-18
 ### Changed
