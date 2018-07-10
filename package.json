@@ -1,6 +1,6 @@
 {
   "name": "@rduk/expression",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Generate abstract syntax tree",
   "engines": {
     "node": ">=6.4.0"
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rd-uk/rduk-expression.git"
+    "url": "https://github.com/rd-uk/rduk-expression"
   },
   "bugs": {
     "url": "https://github.com/rd-uk/rduk-expression/issues"
@@ -30,14 +30,18 @@
   "author": "RDUK <tech@rduk.fr>",
   "license": "MIT",
   "dependencies": {
-    "@rduk/errors": "1.3.0",
-    "@rduk/logger": "1.0.1",
     "esprima": "4.0.0"
   },
   "devDependencies": {
+    "@rduk/errors": "^1.3.1",
+    "@rduk/logger": "^1.0.3",
     "coveralls": "3.0.1",
     "istanbul": "0.4.5",
     "jasmine": "3.1.0",
     "standard": "11.0.1"
+  },
+  "peerDependencies": {
+    "@rduk/errors": "1.x",
+    "@rduk/logger": "1.x"
   }
 }
