@@ -30,7 +30,7 @@
   "author": "RDUK <tech@rduk.fr>",
   "license": "MIT",
   "dependencies": {
-    "esprima": "4.0.0"
+    "esprima": "4.0.1"
   },
   "devDependencies": {
     "@rduk/configuration": "^2.2.2",
