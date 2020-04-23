@@ -37,7 +37,7 @@
     "@rduk/errors": "^1.3.1",
     "@rduk/logger": "^1.0.3",
     "@rduk/provider": "^3.1.2",
-    "coveralls": "3.0.1",
+    "coveralls": "3.0.14",
     "istanbul": "0.4.5",
     "jasmine": "3.1.0",
     "standard": "11.0.1"
